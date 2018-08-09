@@ -12,6 +12,7 @@ import com.bcopstein.APICalctaxas.persistencia.Persistencia;
 
 public class CriaOperacoes{
     // Argumentos: mes inicial, mes final, ano
+	// oi
     public static void main( String[] args )
     {
         if (args.length != 3){
