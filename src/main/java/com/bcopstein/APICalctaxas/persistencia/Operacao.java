@@ -1,6 +1,8 @@
 package com.bcopstein.APICalctaxas.persistencia;
 
-public class Operacao {
+import java.util.Comparator;
+
+public class Operacao implements Comparator<Operacao> {
 	public final int CREDITO = 0;
 	public final int DEBITO = 1;
 
@@ -63,6 +65,58 @@ public class Operacao {
 	public int getTipoOperacao() {
 		return tipoOperacao;
 	}
+    
+    public int compare(Operacao op1, Operacao op2)
+    {
+        if(op1.getAno() == op2.getAno())
+        {
+            if(op1.getMes() == op2.getMes())
+            {
+                if(op1.getDia() == op2.getDia())
+                {
+                    if(op1.getHora() == op2.getHora())
+                    {
+                        if(op1.getMinuto() == op2.getMinuto())
+                        {
+                            if(op1.getSegundo() == op2.getSegundo())
+                            {
+                                return 0;
+                            }
+                            else
+                            {
+                                return op1.getSegundo() - op2.getSegundo();
+                            }
+                        }
+                        else
+                        {
+                            return op1.getMinuto() - op2.getMinuto();
+                        }
+                    }
+                    else
+                    {
+                        return op1.getHora() - op2.getHora();
+                    }
+                }
+                else
+                {
+                    return op1.getDia() - op2.getDia();
+                }
+            }
+            else
+            {
+                return op1.getMes() - op2.getMes();
+            }
+        }
+        else
+        {
+            return op1.getAno() - op2.getAno();
+        }
+    }
+    
+    public boolean equals(Operacao op)
+    {
+        return false;
+    }
 
 	@Override
 	public String toString() {
