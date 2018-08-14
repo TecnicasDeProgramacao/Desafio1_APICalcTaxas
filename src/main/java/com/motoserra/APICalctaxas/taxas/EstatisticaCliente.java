@@ -112,21 +112,63 @@ public class EstatisticaCliente {
     
         List<Double> listaComSaldosDiarios = new ArrayList<>(); 
         int dia = 1;
-        for (Operacao o: lstOpsMes)
+        int diasMes;
+        if(mes == 2)
         {
-            while(o.getDia() != dia)
-            {
-                listaComSaldosDiarios.add(saldo);
-                dia++;
-            }
-            if (o.getTipoOperacao() == 0) //CRÉDITO
-            {
-                saldo += o.getValorOperacao();
-            }
-            else
-            {                   
-                saldo -= o.getValorOperacao();
-            }
+        	diasMes = 28;
+        }
+        else if(mes < 8)
+        {
+        	if(mes % 2 == 0)
+        	{
+        		diasMes = 30;
+        	}
+        	else
+        	{
+        		diasMes = 31;
+        	}
+        }
+        else
+        {
+        	if(mes % 2 == 0)
+        	{
+        		diasMes = 31;
+        	}
+        	else
+        	{
+        		diasMes = 31;
+        	}
+        }        
+        if(lstOpsMes.isEmpty())
+        {
+        	for(int i = 0; i < diasMes; i++)
+        	{
+        		listaComSaldosDiarios.add(saldo);
+        	}
+        }
+        else
+        {
+	        for (Operacao o: lstOpsMes)
+	        {
+	            while(o.getDia() != dia)
+	            {
+	                listaComSaldosDiarios.add(saldo);
+	                dia++;
+	            }
+	            if (o.getTipoOperacao() == 0) //CRÉDITO
+	            {
+	                saldo += o.getValorOperacao();
+	            }
+	            else
+	            {                   
+	                saldo -= o.getValorOperacao();
+	            }
+	            //listaComSaldosDiarios.add(saldo);
+	        }
+	        for(int i = dia; i <= diasMes; i++)
+	        {
+	        	listaComSaldosDiarios.add(saldo);
+	        }
         }
         return listaComSaldosDiarios;
     }
